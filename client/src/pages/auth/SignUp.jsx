@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { Eye, EyeOff, Github } from 'lucide-react';
 import Header from '../../components/Header';
 import useAuth from '../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
     const { signUp } = useAuth()
+    const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({
         fullName: '',
@@ -22,7 +24,6 @@ const SignUp = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Form Submitted:', formData);
         const response = await signUp(formData, navigate);
     };
 
@@ -113,7 +114,7 @@ const SignUp = () => {
 
                 </div>
             </main>
-           
+
         </div>
     );
 };

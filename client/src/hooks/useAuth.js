@@ -138,11 +138,12 @@ export const useAuth = () => {
             dispatch(setLoading(true));
             const response = await authApi.signup(data);
             dispatch(setLoading(false));
-            if (response.data.message == "User registered successfully") {
-                toast.success('Check your mail box for otp', {
+            if (response.data.message == "user_registered") {
+                toast.success('Welcome', {
                     duration: 2000,
                     position: 'bottom-right',
                 });
+                navigate('/login');
             }
             return response;
         } catch (error) {

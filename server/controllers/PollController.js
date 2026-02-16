@@ -93,6 +93,9 @@ class PollController {
             if (!pollId || !optionId) {
                 return respond(res, "Missing Poll ID or Option ID", 400, false);
             }
+            if (!userIp) {
+                return respond(res, "Something went wrong", 400, false);
+            }
             const lockKey = `lock:poll:${pollId}:ip:${userIp}`;
             const alreadyVoted = await redisClient.get(lockKey);
 
