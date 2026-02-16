@@ -10,6 +10,12 @@ const limiter = rateLimit({
     standardHeaders: 'draft-8',
     legacyHeaders: false,
 })
+const sselimiter = rateLimit({
+    windowMs: 2 * 60 * 1000,
+    limit: 60,
+    standardHeaders: 'draft-8',
+    legacyHeaders: false,
+})
 
 const bind = (method) => method.bind(AuthController);
 const ssebind = (method) => method.bind(ServerSentUpdates);
@@ -18,7 +24,7 @@ router.post("/login", limiter, bind(AuthController.login));
 
 router.post("/signup", limiter, bind(AuthController.usersignup));
 
-router.get("/getUser/:token/:email", (req, res, next) => AuthMiddleware.authenticateUser(req, res, next), ssebind(ServerSentUpdates.getUser));
+router.get("/getUser/:token/:email", sselimiter, (req, res, next) => AuthMiddleware.authenticateUser(req, res, next), ssebind(ServerSentUpdates.getUser));
 
 router.use(AuthMiddleware.authenticateUser);
 

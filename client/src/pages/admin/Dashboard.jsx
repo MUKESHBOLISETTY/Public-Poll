@@ -23,7 +23,7 @@ const Dashboard = () => {
     const { loading, token, user, error, email, navigation } = useSelector((state) => state.auth);
     const handleCopyPollLink = (poll) => {
         navigator.clipboard
-            .writeText(`http://localhost:5173/poll/${poll._id}`)
+            .writeText(`https://public-poll-ecru.vercel.app/poll/${poll._id}`)
             .then(() => toast.success("Poll Link Copied Successfully", { duration: 3000, position: 'bottom-right' }))
     };
 
