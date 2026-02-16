@@ -181,7 +181,9 @@ class PollController {
             if (page < 1 || limit < 1) {
                 return respond(res, "Page and limit must be positive numbers", 400, false);
             }
-            const matchStage = {};
+            const matchStage = {
+                user: req.user._id
+            };
             if (search) {
                 matchStage.$or = [
                     { "question.questionText": { $regex: search, $options: "i" } },
