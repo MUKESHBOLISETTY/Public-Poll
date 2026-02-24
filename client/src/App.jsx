@@ -41,6 +41,7 @@ function App() {
     const path = location.pathname;
 
     if (user.role === "ADMIN") {
+      if (path.startsWith("/poll")) return;
       if (!path.startsWith("/dashboard")) {
         navigate("/dashboard", { replace: true });
       }
