@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-    ArrowRight
+    ArrowRight,
+    Github
 } from 'lucide-react';
 import Header from '../components/Header';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +9,7 @@ import poll_example from '../assets/poll_example.png';
 
 const LandingPage = () => {
     const navigate = useNavigate()
+    
     return (
         <div className="bg-[#f6f6f8] dark:bg-[#101322] text-slate-900 dark:text-slate-100 antialiased min-h-screen">
             <Header />
@@ -34,11 +36,28 @@ const LandingPage = () => {
                                 </p>
 
                                 <div className="flex flex-wrap gap-4">
-                                    <button onClick={() => { navigate('/signup') }} className="h-14 px-8 bg-[#1337ec] text-white font-bold rounded-xl text-lg hover:shadow-xl hover:shadow-[#1337ec]/30 transition-all flex items-center gap-2">
+                                    <button 
+                                        onClick={() => { navigate('/signup') }} 
+                                        className="h-14 px-8 bg-[#1337ec] text-white font-bold rounded-xl text-lg hover:shadow-xl hover:shadow-[#1337ec]/30 transition-all flex items-center gap-2"
+                                    >
                                         Start Your First Poll
                                         <ArrowRight size={20} />
                                     </button>
+
+                                    <a 
+                                        href="https://github.com/MUKESHBOLISETTY/Public-Poll" 
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                        className="h-14 px-8 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white font-bold rounded-xl text-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-all flex items-center gap-2"
+                                    >
+                                        <Github size={20} />
+                                        Star on GitHub
+                                    </a>
                                 </div>
+                                
+                                <p className="mt-4 text-sm text-slate-500 dark:text-slate-500 italic">
+                                    Enjoying the project? Star it on GitHub to show your support!
+                                </p>
 
                             </div>
 
@@ -51,7 +70,6 @@ const LandingPage = () => {
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                                 </div>
-
                             </div>
                         </div>
                     </div>

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import {
     Send,
-    BadgeCheck
+    BadgeCheck,
+    Github
 } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
@@ -10,6 +11,7 @@ import { useParams } from 'react-router-dom';
 import axios from "axios";
 import { activateSSE } from '../../redux/slices/pollSlice';
 import Header from '../../components/Header';
+
 const PollPage = () => {
     const dispatch = useDispatch()
     const { pollId } = useParams();
@@ -18,6 +20,7 @@ const PollPage = () => {
     const [selectedOption, setSelectedOption] = useState('');
     const [hasVoted, setHasVoted] = useState(false);
     const { submitted, voting, pollData, activeSSE } = useSelector((state) => state.poll);
+
     const handleVote = async () => {
         await votePoll(pollId, selectedOption, ip);
     };
@@ -27,12 +30,11 @@ const PollPage = () => {
 
         if (existingVote) {
             if (!hasVoted) setHasVoted(true);
-
             if (!selectedOption) setSelectedOption(existingVote.optionId);
-
             if (!activeSSE) dispatch(activateSSE(true));
         }
     }, [submitted, pollId, activeSSE, hasVoted, selectedOption, dispatch]);
+
     const getData = async () => {
         const res = await axios.get("https://api.ipify.org/?format=json");
         setIP(res.data.ip);
@@ -126,6 +128,20 @@ const PollPage = () => {
                     )}
                 </div>
 
+                <div className="mt-12 flex flex-col items-center gap-3">
+                    <p className="text-slate-500 dark:text-slate-400 text-sm">
+                        Like this project? Show some love!
+                    </p>
+                    <a 
+                        href="https://github.com/MUKESHBOLISETTY/Public-Poll" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-white dark:hover:bg-slate-800 transition-colors text-slate-700 dark:text-slate-300 font-semibold text-sm"
+                    >
+                        <Github size={18} />
+                        Star on GitHub
+                    </a>
+                </div>
 
             </main>
         </div>
